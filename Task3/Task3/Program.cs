@@ -4,34 +4,36 @@ namespace Task3
 {
     class Program
     {
-        static bool CheckingInput(out int a)
+        static void CheckInput(out int a)
         {
-            try
+            string s;
+            while(true)
             {
-                a = int.Parse(Console.ReadLine());
+                s = Console.ReadLine();
+                if(int.TryParse(s, out a))
+                {
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Error. Try again");
+                }
             }
-            catch
-            {
-                Console.WriteLine("Error. Try again");
-                return CheckingInput(out a);
-            }
-            return true;
         }
         static void Main(string[] args)
         {
-            int a, number, j;
             Console.WriteLine("Введите размер массива");
-            CheckingInput(out a);
+            CheckInput(out int a);
             Console.WriteLine("Заполните массив элементами кроме последнего ");
             int[] array = new int[a];
             for (int i = 0; i < array.Length - 1; i++)
             {
-                CheckingInput(out array[i]);
+                CheckInput(out array[i]);
             }
             Console.WriteLine("Введите число для подстановки");
-            CheckingInput(out number);
+            CheckInput(out int number);
             Console.WriteLine("введите номер позиции для подстановки");
-            CheckingInput(out j);
+            CheckInput(out int j);
             for (int i = array.Length - 1; i > j; i--)
             {
                 array[i] = array[i - 1];
