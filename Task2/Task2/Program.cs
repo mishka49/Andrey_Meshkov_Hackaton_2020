@@ -6,6 +6,7 @@ namespace Task2
 {
     class Program
     {
+<<<<<<< Updated upstream
         static bool CheckingInput(out int a)
         {
             try
@@ -24,6 +25,30 @@ namespace Task2
             int a, k;
             Console.WriteLine("Ввведите размер массива");
             CheckingInput(out a);
+=======
+        static void CheckInput(out int a)
+        {
+            string s;
+            bool result;
+            while(true)
+            {
+                s = Console.ReadLine();
+                if(int.TryParse(s, out a))
+                {
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Error. Try again");
+                }
+            }
+        }
+        static void Main(string[] args)
+        {
+            int k;
+            Console.WriteLine("Ввведите размер массива");
+            CheckInput(out int a);
+>>>>>>> Stashed changes
             Random random = new Random();
             int[] array = new int[a];
             for (int i = 0; i < array.Length; i++)
@@ -36,7 +61,10 @@ namespace Task2
                 Console.Write(z);
             }
             Console.WriteLine();
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             List<int> number = new List<int> { };
             List<int> weight = new List<int> { };
             Array.Sort(array);
