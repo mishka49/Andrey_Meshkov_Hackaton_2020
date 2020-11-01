@@ -4,24 +4,27 @@ namespace Task4
 {
     class Program
     {
-        static bool CheckingInput(out int a)
+        static void CheckInput(out int a)
         {
-            try
+            string s;
+            while(true)
             {
-                a = int.Parse(Console.ReadLine());
+                s = Console.ReadLine();
+                if (int.TryParse(s, out a))
+                {
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Error. Try again");
+                }
             }
-            catch
-            {
-                Console.WriteLine("Error. Try again");
-                return CheckingInput(out a);
-            }
-            return true;
         }
         static void Main(string[] args)
         {
-            int a, tmp; 
+            int tmp; 
             Console.WriteLine("введите размер массива");
-            CheckingInput(out a);
+            CheckInput(out int a);
             Random random = new Random();
             int[] array = new int[a];
             for (int i = 0; i < array.Length; i++)
@@ -34,7 +37,6 @@ namespace Task4
                 Console.Write(z);
             }
             Console.WriteLine();
-
             for (int j = 1; j < array.Length; j++)
             {
                 for (int i = 0; i < array.Length - j; i++)
