@@ -6,69 +6,64 @@ namespace Task2
 {
     class Program
     {
-        static void CheckInput(out int a)
+        static int CheckInput()
         {
-            string s;
-            bool result;
-            while(true)
-            {
-                s = Console.ReadLine();
-                if(int.TryParse(s, out a))
-                {
-                    return;
-                }
-                else
-                {
+            int value;
+            while(!int.TryParse(Console.ReadLine(),out value) || value==0)
+            { 
                     Console.WriteLine("Error. Try again");
-                }
             }
+            return value;
         }
-        static void Main(string[] args)
+        static void CreatRandomArray(int[] array)
         {
-            int k;
-            Console.WriteLine("Ввведите размер массива");
-            CheckInput(out int a);
             Random random = new Random();
-            int[] array = new int[a];
             for (int i = 0; i < array.Length; i++)
             {
                 array[i] = random.Next(0, 10);
             }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Ввведите размер массива");
+            int value = CheckInput();
+            int[] array = new int[value];
+            CreatRandomArray(array);
             Console.WriteLine("Befor");
             foreach (int z in array)
             {
                 Console.Write(z);
             }
             Console.WriteLine();
-            List<int> number = new List<int> { };
-            List<int> weight = new List<int> { };
+            List<int> numbers = new List<int> { };
+            List<int> weights = new List<int> { };
             Array.Sort(array);
-            for(int j=0;j<array.Length;j+=k)
+            int reps;
+            for(int j=0;j<array.Length;j+=reps)
             {
-                k = 0;
-                number.Add(array[j]);
+                reps = 0;
+                numbers.Add(array[j]);
                 for (int i = j; i < array.Length; i++)
                 {
                     if (array[j] == array[i])
                     {
-                        k++;
+                        reps++;
                     }
                 }
-                weight.Add(k);
+                weights.Add(reps);
             }
-            int max = weight.Max();
-            if (max == 1)
+            if (weights.Max() == 1)
             {
                 Console.WriteLine("Все элементы массива встречаются не более одного раза");
             }
             else
             {
                 Console.Write("элементы встречающиеся наибольшее количество раз: ");
-                for (int i = 0; i < weight.Count; i++)
+                for (int i = 0; i < weights.Count; i++)
                 {
-                    if (weight[i] == max)
+                    if (weights[i] == weights.Max())
                     {
-                        Console.Write(number[i] + "\t");
+                        Console.Write(numbers[i] + "\t");
                     }
                 }          
             }  
