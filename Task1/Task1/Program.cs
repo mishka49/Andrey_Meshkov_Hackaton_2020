@@ -4,27 +4,18 @@ namespace Task1
 {
     class Program
     {
-        static void CheckInput(out double a)
+        static double CheckInput()
         {
-            string s;
-            bool result;
-            while(true)
+            double value;
+            while(!double.TryParse(Console.ReadLine(), out value))
             {
-                s = Console.ReadLine();
-                result = double.TryParse(s, out a);
-                if(result)
-                {
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Error. Try again");
-                }
+                Console.WriteLine("Error. Try again");
             }
+            return value;
         }
-        static bool CheckExistence(double a, double b, double c)
+        static bool CheckExistence(double firstSide, double secondSide, double thirdSide)
         {
-            if (a + b > c && a+c>b && b+c>a)
+            if (firstSide + secondSide > thirdSide && firstSide + thirdSide > secondSide && secondSide + thirdSide > firstSide)
             {
                 return true;
             }
@@ -34,13 +25,13 @@ namespace Task1
                 return false;
             }        
         }
-        static void DetermineType(double a, double b, double c)
+        static void DetermineType(double firstSide, double secondSide, double thirdSide)
         {
-            if (a == b && b == c)
+            if (firstSide == secondSide && secondSide == thirdSide)
             {
                 Console.WriteLine("Equilateral triangle");
             }
-            else if (a == b || b == c || a == c)
+            else if (firstSide == secondSide || secondSide ==thirdSide || firstSide == thirdSide)
             {
                 Console.WriteLine("Isosceles triangle");
             }
@@ -52,14 +43,14 @@ namespace Task1
         static void Main(string[] args)
         {
             Console.WriteLine("enter the first side");
-            CheckInput(out double FirstSide);
+            double firstSide = CheckInput();
             Console.WriteLine("Enter the second side");
-            CheckInput(out double SecondSide);
+            double secondSide = CheckInput();
             Console.WriteLine("Enter the third side");
-            CheckInput(out double ThirdSide);
-            if (CheckExistence(FirstSide, SecondSide, ThirdSide))
+            double thirdSide = CheckInput();
+            if (CheckExistence(firstSide, secondSide, thirdSide))
             {
-                DetermineType(FirstSide, SecondSide, ThirdSide);
+                DetermineType(firstSide, secondSide, thirdSide);
             } 
             Console.ReadKey();
         }
