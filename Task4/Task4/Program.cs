@@ -2,58 +2,56 @@
 
 namespace Task4
 {
-    class Program
+    internal class Program
     {
-        static void CheckInput(out int a)
+        private static int EnterIntValue()
         {
-            string s;
-            while(true)
+            int value;
+            while (!int.TryParse(Console.ReadLine(), out value))
             {
-                s = Console.ReadLine();
-                if (int.TryParse(s, out a))
-                {
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Error. Try again");
-                }
+                Console.WriteLine("Error. Try again");
             }
+            return value;
         }
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            int tmp; 
-            Console.WriteLine("введите размер массива");
-            CheckInput(out int a);
+            int temporaryStorage;
+            Console.WriteLine("Enter the size of the array");
+            int a = EnterIntValue();
             Random random = new Random();
             int[] array = new int[a];
+
             for (int i = 0; i < array.Length; i++)
             {
                 array[i] = random.Next(1, 10);
             }
+
             Console.WriteLine("Befor Sort:");
-            foreach (int z in array)
+            foreach (var item in array)
             {
-                Console.Write(z);
+                Console.Write(item);
             }
             Console.WriteLine();
-            for (int j = 1; j < array.Length; j++)
+
+            for (int i = 1; i < array.Length; i++)
             {
-                for (int i = 0; i < array.Length - j; i++)
+                for (int j = 0; j < array.Length - i; j++)
                 {
-                    if (array[i] > array[i + 1])
+                    if (array[j] > array[j + 1])
                     {
-                        tmp = array[i];
-                        array[i] = array[i + 1];
-                        array[i + 1] = tmp;
+                        temporaryStorage = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temporaryStorage;
                     }
                 }
             }
+
             Console.WriteLine("After sort:");
-            foreach (int z in array)
+            foreach (var item in array)
             {
-                Console.Write(z);
+                Console.Write(item);
             }
+
             Console.ReadKey();
         }
     }
