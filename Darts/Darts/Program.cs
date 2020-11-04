@@ -8,12 +8,13 @@ namespace Darts
         private static double InputValue()
         {
             double value;
-            while(!double.TryParse(Console.ReadLine(),out value))
+            while (!double.TryParse(Console.ReadLine(), out value))
             {
                 Console.WriteLine("Error. Try again");
             }
             return value;
         }
+
         private static int GetScore(double x, double y)
         {
             if (Abs(x) > 10 || Abs(y) > 10)
@@ -33,10 +34,12 @@ namespace Darts
                 return 10;
             }
         }
+
         private static void Main(string[] args)
         {
             int score = 0;
-            for(int i=0;i<3;i++)
+
+            for (int i = 0; i < 3; i++)
             {
                 Console.WriteLine("Enter x");
                 double x = InputValue();
@@ -44,7 +47,8 @@ namespace Darts
                 double y = InputValue();
                 score += GetScore(x, y);
             }
-            Console.WriteLine("Your score:"+score);
+
+            Console.WriteLine("Your score:" + score);
             Console.ReadKey();
         }
     }
