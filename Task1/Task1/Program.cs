@@ -2,36 +2,27 @@
 
 namespace Task1
 {
-    class Program
+    internal class Program
     {
-        static double CheckInput()
+        private static double InputValue()
         {
             double value;
-            while(!double.TryParse(Console.ReadLine(), out value))
+            while (!double.TryParse(Console.ReadLine(), out value))
             {
                 Console.WriteLine("Error. Try again");
             }
             return value;
         }
-        static bool CheckExistence(double firstSide, double secondSide, double thirdSide)
-        {
-            if (firstSide + secondSide > thirdSide && firstSide + thirdSide > secondSide && secondSide + thirdSide > firstSide)
-            {
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("This triangle cannot exist");
-                return false;
-            }        
-        }
-        static void DetermineType(double firstSide, double secondSide, double thirdSide)
+
+        private static bool CheckExistTriangle(double firstSide, double secondSide, double thirdSide)=> firstSide + secondSide > thirdSide && firstSide + thirdSide > secondSide && secondSide + thirdSide > firstSide ? true : false;
+
+        private static void DefineType(double firstSide, double secondSide, double thirdSide)
         {
             if (firstSide == secondSide && secondSide == thirdSide)
             {
                 Console.WriteLine("Equilateral triangle");
             }
-            else if (firstSide == secondSide || secondSide ==thirdSide || firstSide == thirdSide)
+            else if (firstSide == secondSide || secondSide == thirdSide || firstSide == thirdSide)
             {
                 Console.WriteLine("Isosceles triangle");
             }
@@ -40,18 +31,23 @@ namespace Task1
                 Console.WriteLine("Versatile triangle");
             }
         }
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             Console.WriteLine("enter the first side");
-            double firstSide = CheckInput();
+            double firstSide = InputValue();
             Console.WriteLine("Enter the second side");
-            double secondSide = CheckInput();
+            double secondSide = InputValue();
             Console.WriteLine("Enter the third side");
-            double thirdSide = CheckInput();
-            if (CheckExistence(firstSide, secondSide, thirdSide))
+            double thirdSide = InputValue();
+            if (CheckExistTriangle(firstSide, secondSide, thirdSide))
             {
-                DetermineType(firstSide, secondSide, thirdSide);
-            } 
+                DefineType(firstSide, secondSide, thirdSide);
+            }
+            else
+            {
+                Console.WriteLine("This triangle cannot exist");
+            }
             Console.ReadKey();
         }
     }
