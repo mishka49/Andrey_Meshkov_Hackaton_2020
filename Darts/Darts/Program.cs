@@ -3,9 +3,9 @@ using static System.Math;
 
 namespace Darts
 {
-    class Program
+    internal class Program
     {
-        static double InputValue()
+        private static double InputValue()
         {
             double value;
             while(!double.TryParse(Console.ReadLine(),out value))
@@ -14,7 +14,7 @@ namespace Darts
             }
             return value;
         }
-        static int GetScore(double x, double y)
+        private static int GetScore(double x, double y)
         {
             if (Abs(x) > 10 || Abs(y) > 10)
             {
@@ -33,7 +33,7 @@ namespace Darts
                 return 10;
             }
         }
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             int score = 0;
             for(int i=0;i<3;i++)
