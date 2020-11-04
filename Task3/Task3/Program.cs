@@ -2,48 +2,47 @@
 
 namespace Task3
 {
-    class Program
+    internal class Program
     {
-        static void CheckInput(out int a)
+        private static int EnterInttValue()
         {
-            string s;
-            while(true)
+            int value;
+            while (!int.TryParse(Console.ReadLine(), out value))
             {
-                s = Console.ReadLine();
-                if(int.TryParse(s, out a))
-                {
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Error. Try again");
-                }
+                Console.WriteLine("Error. Try again");
             }
+            return value;
         }
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Введите размер массива");
-            CheckInput(out int a);
+            int size = EnterInttValue();
             Console.WriteLine("Заполните массив элементами кроме последнего ");
-            int[] array = new int[a];
+            int[] array = new int[size];
+
             for (int i = 0; i < array.Length - 1; i++)
             {
-                CheckInput(out array[i]);
+                array[i] = EnterInttValue();
             }
+
             Console.WriteLine("Введите число для подстановки");
-            CheckInput(out int number);
+            int number = EnterInttValue();
             Console.WriteLine("введите номер позиции для подстановки");
-            CheckInput(out int j);
-            for (int i = array.Length - 1; i > j; i--)
+            int itemNumber = EnterInttValue();
+
+            for (int i = array.Length - 1; i > itemNumber; i--)
             {
                 array[i] = array[i - 1];
             }
-            array[j] = number;
+
+            array[itemNumber] = number;
+
             Console.WriteLine("Массив после подстановки:");
-            foreach (int z in array)
+            foreach (var item in array)
             {
-                Console.Write(z);
+                Console.Write(item);
             }
+
             Console.ReadKey();
         }
 
