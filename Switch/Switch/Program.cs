@@ -1,8 +1,8 @@
 ﻿namespace Switch
 {
-    class Program
+    internal class Program
     {
-        static string DefinesTypeOfVariable(object argument)
+        private static string DefinesTypeOfVariable(object argument)
         {
             switch (argument.GetType().ToString())
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
 
         }
