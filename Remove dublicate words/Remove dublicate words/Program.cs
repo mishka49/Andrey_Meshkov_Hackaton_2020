@@ -1,23 +1,23 @@
 ﻿using System;
 
-namespace Remove_dublicate_words
+namespace RemoveDublicateWords
 {
-    class Program
+    internal class Program
     {
-        static string RemoveDublicateWords(string text)
+        private static string RemoveDublicateWords(string text)
         {
             string[] array = text.Split('.', ',', '!', '?', '-', ':', ';', ' ');
 
-            for (int j = 0; j < array.Length; j++)
-                for (int i = j + 1; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
                     if (array[j] == array[i])
                     {
-                        array[i] = null;
+                        array[j] = null;
                     }
                 }
 
-            text = null;
+            text ="";
 
             foreach (string item in array)
             {
@@ -26,7 +26,8 @@ namespace Remove_dublicate_words
 
             return text;
         }
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             Console.WriteLine("Input text");
             string text = RemoveDublicateWords(Console.ReadLine());
