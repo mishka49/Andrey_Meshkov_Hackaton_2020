@@ -24,7 +24,5 @@ namespace Bank1
                 Console.WriteLine();
             }
         }
-
-
     }
 }

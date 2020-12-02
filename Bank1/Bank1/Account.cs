@@ -6,6 +6,7 @@ namespace Bank1
     public class Account
     {
         public Guid Id { get; }
+
         public List<Card> cards;
 
         public Account()
@@ -27,8 +28,10 @@ namespace Bank1
 
         public void AddNewCard()
         {
+
             while (true)
             {
+
                 Console.WriteLine("Введите тип карты");
                 string type = Console.ReadLine();
 
@@ -47,10 +50,9 @@ namespace Bank1
                     Console.WriteLine("введен неверный тип карты");
                     continue;
                 }
+
             }
 
         }
-
-
     }
 }

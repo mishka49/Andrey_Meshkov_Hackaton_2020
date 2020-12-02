@@ -5,8 +5,11 @@ namespace Bank1
     public abstract class Card
     {
         public long Id { get; }
+
         public double Total { get; set; }
+
         public string Type { get; set; }
+
         public Card()
         {
             Id = CreatRandomIdOfCard();
@@ -62,6 +65,7 @@ namespace Bank1
                 {
                     return long.Parse(number);
                 }
+
             }
 
         }

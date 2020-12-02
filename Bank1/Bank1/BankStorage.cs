@@ -12,6 +12,7 @@ namespace Bank1
             
             while (true)
             {
+
                 bool coincidence = false;
                 Console.WriteLine("Введите имя пользователя");
                 string firstName = Console.ReadLine();
@@ -34,6 +35,7 @@ namespace Bank1
                     users.Add(new User(firstName, lastName));
                     break;
                 }
+
             }
 
         }

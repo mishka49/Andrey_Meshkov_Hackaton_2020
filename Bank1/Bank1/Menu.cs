@@ -10,8 +10,10 @@ namespace Bank1
         {
             ShowMainMenu();
         }
+
         public static T EnterCorrectData<T>()
         {
+
             while (true)
             {
 
@@ -26,6 +28,7 @@ namespace Bank1
                 }
 
             }
+
         }
 
         public static void ShowMainMenu()
@@ -42,6 +45,7 @@ namespace Bank1
 
             while (true)
             {
+
                 string operation = Console.ReadLine();
 
                 switch (operation)
@@ -71,6 +75,7 @@ namespace Bank1
                         Console.WriteLine("Данной операции не существует");
                         break;
                 }
+
             }
 
         }
@@ -98,6 +103,7 @@ namespace Bank1
 
                     if (user.FirstName == firstName && user.LastName == lastName)
                     {
+
                         foreach (var account in user.accounts)
                         {
 
@@ -116,6 +122,7 @@ namespace Bank1
 
                         }
                         break;
+
                     }
 
                 }
@@ -149,6 +156,7 @@ namespace Bank1
 
                 try
                 {
+
                     foreach (var user in BankStorage.users)
                     {
 
@@ -195,6 +203,7 @@ namespace Bank1
                         }
 
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -220,6 +229,7 @@ namespace Bank1
 
                         if (user.FirstName == firstName && user.LastName == lastName)
                         {
+
                             foreach (var account in user.accounts)
                             {
                                 foreach (var card in account.cards)
@@ -242,6 +252,7 @@ namespace Bank1
 
                                 }
                             }
+
                         }
 
                     }
@@ -254,7 +265,6 @@ namespace Bank1
 
             }
         }
-
 
         public static void WithdrawMoneyFromTheCard()
         {
@@ -311,7 +321,6 @@ namespace Bank1
             ShowMainMenu();
         }
 
-
         public static void ObtainInformationAboutAccounts()
         {
             Console.Clear();
@@ -365,8 +374,10 @@ namespace Bank1
 
                 foreach (var user in BankStorage.users)
                 {
+
                     if (user.FirstName == firstName && user.LastName == lastName)
                     {
+
                         coincidence = true;
 
                         while (true)
@@ -382,7 +393,7 @@ namespace Bank1
                                     break;
                                 case "2":
                                     Console.WriteLine("Введите номер счета, к которому хотите привязать карту");
-                                    Guid Id = new Guid(Console.ReadLine()); //EnterCorrectData<Guid>();
+                                    Guid Id = new Guid(Console.ReadLine());
                                     coincidence = false;
 
                                     foreach (var account in user.accounts)
@@ -405,9 +416,12 @@ namespace Bank1
                                     continue;
                             }
                             break;
+
                         }
                         break;
+
                     }
+
                 }
 
                 if (!coincidence)

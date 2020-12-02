@@ -6,7 +6,9 @@ namespace Bank1
     public class User
     {
         public List<Account> accounts;
+
         public string FirstName { get; }
+
         public string LastName { get; }
 
         public User(string firstName, string lastName)
