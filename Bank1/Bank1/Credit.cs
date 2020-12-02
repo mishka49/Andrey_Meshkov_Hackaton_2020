@@ -2,7 +2,7 @@
 
 namespace Bank1
 {
-    class Credit
+    public class Credit
     {
         public string Status { get; set; }
         public double Total { get; set; }

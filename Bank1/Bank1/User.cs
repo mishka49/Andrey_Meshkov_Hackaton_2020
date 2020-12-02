@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Bank1
 {
-    class User
+    public class User
     {
         public List<Account> accounts;
         public string FirstName { get; }

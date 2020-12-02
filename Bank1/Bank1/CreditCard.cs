@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Bank1
 {
-    class CreditCard : Card
+    public class CreditCard : Card
     {
         public List<Credit> credits;
 

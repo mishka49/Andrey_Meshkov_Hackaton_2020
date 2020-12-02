@@ -10,7 +10,7 @@ namespace Bank1
         {
             ShowMainMenu();
         }
-        static T EnterCorrectData<T>()
+        public static T EnterCorrectData<T>()
         {
             while (true)
             {
@@ -28,7 +28,7 @@ namespace Bank1
             }
         }
 
-        static void ShowMainMenu()
+        public static void ShowMainMenu()
         {
             Console.Clear();
             Console.WriteLine("Menu: \n" +
@@ -75,7 +75,7 @@ namespace Bank1
 
         }
 
-        static void AddFundsToYourCard()
+        public static void AddFundsToYourCard()
         {
             Console.Clear();
             coincidence = false;
@@ -130,7 +130,7 @@ namespace Bank1
             ShowMainMenu();
         }
 
-        static void TransferMoneyFromCardToCard()
+        public static void TransferMoneyFromCardToCard()
         {
             Console.Clear();
 
@@ -256,7 +256,7 @@ namespace Bank1
         }
 
 
-        static void WithdrawMoneyFromTheCard()
+        public static void WithdrawMoneyFromTheCard()
         {
             Console.Clear();
             coincidence = false;
@@ -312,9 +312,10 @@ namespace Bank1
         }
 
 
-        static void ObtainInformationAboutAccounts()
+        public static void ObtainInformationAboutAccounts()
         {
             Console.Clear();
+            coincidence = false;
 
             Console.WriteLine("Введите имя пользователя");
             string firstName = Console.ReadLine();
@@ -324,16 +325,22 @@ namespace Bank1
             {
                 if (user.FirstName == firstName && user.LastName == lastName)
                 {
+                    coincidence = true;
                     user.DisplayInfo();
                     break;
                 }
+            }
+
+            if(!coincidence)
+            {
+                Console.WriteLine("Пользователь не найден");
             }
 
             Console.ReadKey();
             ShowMainMenu();
         }
 
-        static void AddUser()
+        public static void AddUser()
         {
             Console.Clear();
 
@@ -344,7 +351,7 @@ namespace Bank1
             ShowMainMenu();
         }
 
-        static void OpenAccountOrAddCard()
+        public static void OpenAccountOrAddCard()
         {
             Console.Clear();
             coincidence = false;
@@ -375,7 +382,7 @@ namespace Bank1
                                     break;
                                 case "2":
                                     Console.WriteLine("Введите номер счета, к которому хотите привязать карту");
-                                    ulong Id = EnterCorrectData<ulong>();
+                                    Guid Id = new Guid(Console.ReadLine()); //EnterCorrectData<Guid>();
                                     coincidence = false;
 
                                     foreach (var account in user.accounts)
@@ -413,7 +420,7 @@ namespace Bank1
             ShowMainMenu();
         }
 
-        static void ObtainCredit()
+        public static void ObtainCredit()
         {
             Console.Clear();
 

@@ -2,7 +2,7 @@
 
 namespace Bank1
 {
-    abstract class Card
+    public abstract class Card
     {
         public long Id { get; }
         public double Total { get; set; }

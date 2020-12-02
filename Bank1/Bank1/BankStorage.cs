@@ -3,14 +3,9 @@ using System.Collections.Generic;
 
 namespace Bank1
 {
-    static class BankStorage
+    public static class BankStorage
     {
         public static List<User> users = new List<User> { };
-
-       /* static BankStorage()
-        {
-            users = new List<User> { };
-        }*/
 
         public static void AddNewUser()
         {
