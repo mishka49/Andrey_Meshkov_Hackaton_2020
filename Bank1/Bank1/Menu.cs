@@ -2,21 +2,14 @@
 
 namespace Bank1
 {
-    public class Menu
+    public static class Menu
     {
         private static bool coincidence;
 
-        public Menu()
-        {
-            ShowMainMenu();
-        }
-
         public static T EnterCorrectData<T>()
         {
-
             while (true)
             {
-
                 try
                 {
                     T result = (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
@@ -26,9 +19,7 @@ namespace Bank1
                 {
                     Console.WriteLine("Неверный формат данных");
                 }
-
             }
-
         }
 
         public static void ShowMainMenu()
@@ -100,38 +91,29 @@ namespace Bank1
 
                 foreach (var user in BankStorage.users)
                 {
-
                     if (user.FirstName == firstName && user.LastName == lastName)
                     {
-
                         foreach (var account in user.accounts)
                         {
-
                             foreach (var card in account.cards)
                             {
-
                                 if (card.Id == id)
                                 {
                                     coincidence = true;
                                     card.Total += total;
                                     break;
                                 }
-
                             }
                             break;
-
                         }
                         break;
-
                     }
-
                 }
 
                 if (!coincidence)
                 {
                     Console.WriteLine("Совпадений не найдено");
                 }
-
             }
 
             ShowMainMenu();
@@ -144,7 +126,7 @@ namespace Bank1
             coincidence = false;
             long yourId;
             double total = 0;
-            string yourType = "Debit";
+            string yourType = Card.debitType;
 
             while (!coincidence)
             {
@@ -156,16 +138,12 @@ namespace Bank1
 
                 try
                 {
-
                     foreach (var user in BankStorage.users)
                     {
-
                         foreach (var account in user.accounts)
                         {
-
                             foreach (var card in account.cards)
                             {
-
                                 if (card.Id == yourId)
                                 {
                                     coincidence = true;
@@ -180,7 +158,7 @@ namespace Bank1
                                     }
                                     else if (card is CreditCard)
                                     {
-                                        yourType = "Credit";
+                                        yourType = Card.creditType;
                                         foreach (var credit in (card as CreditCard).credits)
                                         {
                                             if (credit.Status == "norepaid")
@@ -203,7 +181,6 @@ namespace Bank1
                         }
 
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -226,20 +203,17 @@ namespace Bank1
                 {
                     foreach (var user in BankStorage.users)
                     {
-
                         if (user.FirstName == firstName && user.LastName == lastName)
                         {
-
                             foreach (var account in user.accounts)
                             {
                                 foreach (var card in account.cards)
                                 {
-
                                     if (card.Id == idOfRepicient)
                                     {
-
                                         coincidence = true;
-                                        if (card.Type == "Debit" && yourType == "Credit")
+
+                                        if (card.Type == Card.debitType && yourType == Card.creditType)
                                         {
                                             throw new Exception("Нельзя осуществлять переводы с кредитовой карты на дебитовую");
                                         }
@@ -247,14 +221,10 @@ namespace Bank1
                                         {
                                             card.Total += total;
                                         }
-
                                     }
-
                                 }
                             }
-
                         }
-
                     }
                 }
                 catch (Exception ex)
@@ -262,7 +232,6 @@ namespace Bank1
                     Console.WriteLine(ex.Message);
                     continue;
                 }
-
             }
         }
 
@@ -273,7 +242,6 @@ namespace Bank1
 
             while (!coincidence)
             {
-
                 Console.WriteLine("Введите имя пользователя");
                 string firstName = Console.ReadLine();
                 string lastName = Console.ReadLine();
@@ -286,36 +254,29 @@ namespace Bank1
 
                 foreach (var user in BankStorage.users)
                 {
-
                     if (user.FirstName == firstName && user.LastName == lastName)
                     {
                         foreach (var account in user.accounts)
                         {
-
                             foreach (var card in account.cards)
                             {
-
                                 if (card.Id == id)
                                 {
                                     coincidence = true;
                                     card.Total -= total;
                                     break;
                                 }
-
                             }
                             break;
-
                         }
                         break;
                     }
-
                 }
 
                 if (!coincidence)
                 {
                     Console.WriteLine("Совпадений не найдено");
                 }
-
             }
 
             ShowMainMenu();
@@ -340,7 +301,7 @@ namespace Bank1
                 }
             }
 
-            if(!coincidence)
+            if (!coincidence)
             {
                 Console.WriteLine("Пользователь не найден");
             }
@@ -367,17 +328,14 @@ namespace Bank1
 
             while (!coincidence)
             {
-
                 Console.WriteLine("Введите имя пользователя");
                 string firstName = Console.ReadLine();
                 string lastName = Console.ReadLine();
 
                 foreach (var user in BankStorage.users)
                 {
-
                     if (user.FirstName == firstName && user.LastName == lastName)
                     {
-
                         coincidence = true;
 
                         while (true)
@@ -416,19 +374,15 @@ namespace Bank1
                                     continue;
                             }
                             break;
-
                         }
                         break;
-
                     }
-
                 }
 
                 if (!coincidence)
                 {
                     Console.WriteLine("Совпадений не найдено");
                 }
-
             }
 
             ShowMainMenu();
@@ -451,23 +405,18 @@ namespace Bank1
 
                 foreach (var user in BankStorage.users)
                 {
-
                     foreach (var account in user.accounts)
                     {
-
                         foreach (var card in account.cards)
                         {
-                            if (card.Id == id && card.Type == "Credit")
+                            if (card.Id == id && card.Type == Card.creditType)
                             {
                                 (card as CreditCard).credits.Add(new Credit(total, periodOfTime));
                                 card.Total += total;
                                 coincidence = true;
                             }
-
                         }
-
                     }
-
                 }
 
                 if (!coincidence)

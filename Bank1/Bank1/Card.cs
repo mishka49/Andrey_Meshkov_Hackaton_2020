@@ -10,6 +10,10 @@ namespace Bank1
 
         public string Type { get; set; }
 
+        public const string creditType = "Credit";
+
+        public const string debitType = "Debit";
+
         public Card()
         {
             Id = CreatRandomIdOfCard();
@@ -24,7 +28,6 @@ namespace Bank1
 
             while (true)
             {
-
                 for (int i = 0; i < 16; i++)
                 {
                     int randomNumber = random.Next(0, 10);
@@ -37,35 +40,27 @@ namespace Bank1
                     {
                         number += Convert.ToString(randomNumber);
                     }
-
                 }
 
                 foreach (var user in BankStorage.users)
                 {
-
                     foreach (var account in user.accounts)
                     {
-
                         foreach (var card in account.cards)
                         {
-
                             if (card.Id == long.Parse(number))
                             {
                                 coincidence = true;
                                 break;
                             }
-
                         }
-
                     }
-
                 }
 
                 if (!coincidence)
                 {
                     return long.Parse(number);
                 }
-
             }
 
         }

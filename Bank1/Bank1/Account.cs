@@ -28,19 +28,17 @@ namespace Bank1
 
         public void AddNewCard()
         {
-
             while (true)
             {
-
                 Console.WriteLine("Введите тип карты");
                 string type = Console.ReadLine();
 
-                if (type == "Credit")
+                if (type == Card.creditType)
                 {
                     cards.Add(new CreditCard());
                     break;
                 }
-                else if (type == "Debit")
+                else if (type == Card.debitType)
                 {
                     cards.Add(new DebitCard());
                     break;
@@ -50,9 +48,7 @@ namespace Bank1
                     Console.WriteLine("введен неверный тип карты");
                     continue;
                 }
-
             }
-
         }
     }
 }

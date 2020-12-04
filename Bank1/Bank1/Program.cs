@@ -6,7 +6,7 @@ namespace Bank1
     {
         private static void Main(string[] args)
         {
-            new Menu();
+            Menu.ShowMainMenu();
 
             Console.ReadKey();
         }
