@@ -34,10 +34,8 @@ namespace Princess1
 
             for (int i = 0; i < Land.Field.GetLength(0); i++)
             {
-
                 for (int j = 0; j < Land.Field.GetLength(1); j++)
                 {
-
                     if (i == knight.Y && j == knight.X)
                     {
                         Console.Write(knight.Avatar);
@@ -50,7 +48,6 @@ namespace Princess1
                     {
                         Console.Write(" ");
                     }
-
                 }
 
                 Console.WriteLine();
@@ -63,7 +60,6 @@ namespace Princess1
         {
             if (knight.Health - Land.Field[knight.Y, knight.X] > 0)
             {
-
                 knight.Health -= Land.Field[knight.Y, knight.X];
                 Land.Field[knight.Y, knight.X] = 0;
 
@@ -75,7 +71,6 @@ namespace Princess1
                 {
                     return "in progress";
                 }
-
             }
             else
             {
@@ -85,13 +80,13 @@ namespace Princess1
 
         public static string OpenMenu(string result)
         {
-
             while (true)
             {
                 Console.WriteLine($"Вы {result}. Попробывать еще раз?");
                 Console.WriteLine("Yes or No");
 
                 string operation = Console.ReadLine();
+
                 if (operation == "Yes")
                 {
                     return "Yes";
@@ -107,21 +102,18 @@ namespace Princess1
                     Console.WriteLine("Введена неверная операция");
                 }
             }
-
         }
 
         private static void Main(string[] args)
         {
             while (true)
             {
-
                 Console.WriteLine("Введите размер поля");
                 Land land = new Land(EnterCorrectData<int>(), EnterCorrectData<int>());
                 string result;
 
                 while (true)
                 {
-
                     ShowResultOfMotion(land.knight, land.princess);
                     ControlMovment(land.knight);
                     result = CalculateResultOfMotion(land.knight, land.princess);
@@ -139,7 +131,6 @@ namespace Princess1
                     {
                         continue;
                     }
-
                 }
 
                 if (result == "Yes")
@@ -150,7 +141,6 @@ namespace Princess1
                 {
                     return;
                 }
-
             }
         }
 
@@ -158,7 +148,6 @@ namespace Princess1
         {
             while (true)
             {
-
                 try
                 {
                     T result = (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
@@ -168,7 +157,6 @@ namespace Princess1
                 {
                     Console.WriteLine("Неверный формат данных");
                 }
-
             }
         }
     }

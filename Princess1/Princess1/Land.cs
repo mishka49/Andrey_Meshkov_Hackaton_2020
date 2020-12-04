@@ -14,16 +14,15 @@ namespace Princess1
         {
             knight = new Knight();
             princess = new Princess(sizeByY - 1, sizeByX - 1);
-            Field = CreatField(sizeByX, sizeByY);
+            Field = CreateField(sizeByX, sizeByY);
         }
 
-        private static int[,] CreatField(int sizeByX, int sizeByY)
+        private static int[,] CreateField(int sizeByX, int sizeByY)
         {
             int[,] field = new int[sizeByY, sizeByX];
 
             for (int i = 0; i < sizeByY; i++)
             {
-
                 for (int j = 0; j < sizeByX; j++)
                 {
                     field[i, j] = 0;
@@ -31,6 +30,7 @@ namespace Princess1
             }
 
             Random random = new Random();
+
             for (int i = 0; i < 10; i++)
             {
                 field[random.Next(0, sizeByY), random.Next(0, sizeByX)] = random.Next(1, 11);
