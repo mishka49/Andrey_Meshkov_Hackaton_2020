@@ -16,24 +16,33 @@ namespace Princess1
         public static void ControlMovment(Knight knight)
         {
             ConsoleKeyInfo keyPushed = Console.ReadKey();
-            if (keyPushed.Key == ConsoleKey.DownArrow && (knight.Y + 1) < Land.Field.GetLength(0))
-            {
-                knight.Y++;
-            }
 
-            if (keyPushed.Key == ConsoleKey.UpArrow && (knight.Y - 1) >= 0)
+            switch (keyPushed.Key)
             {
-                knight.Y--;
-            }
-
-            if (keyPushed.Key == ConsoleKey.LeftArrow && (knight.X - 1) >= 0)
-            {
-                knight.X--;
-            }
-
-            if (keyPushed.Key == ConsoleKey.RightArrow && (knight.X + 1) < Land.Field.GetLength(1))
-            {
-                knight.X++;
+                case ConsoleKey.DownArrow:
+                    if ((knight.Y + 1) < Land.Field.GetLength(0))
+                    {
+                        knight.Y++;
+                    }
+                    break;
+                case ConsoleKey.UpArrow:
+                    if ((knight.Y - 1) >= 0)
+                    {
+                        knight.Y--;
+                    }
+                    break;
+                case ConsoleKey.LeftArrow:
+                    if ((knight.X - 1) >= 0)
+                    {
+                        knight.X--;
+                    }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if ((knight.X + 1) < Land.Field.GetLength(1))
+                    {
+                        knight.X++;
+                    }
+                    break;
             }
         }
 
