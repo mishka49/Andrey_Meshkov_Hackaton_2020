@@ -2,17 +2,18 @@
 
 namespace Bank1
 {
+    public enum Type
+    {
+        Credit,
+        Debit
+    }
     public abstract class Card
     {
         public long Id { get; }
 
         public double Total { get; set; }
 
-        public string Type { get; set; }
-
-        public const string creditType = "Credit";
-
-        public const string debitType = "Debit";
+        public Type Type { get; set; }
 
         public Card()
         {

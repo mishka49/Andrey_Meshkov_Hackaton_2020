@@ -11,7 +11,7 @@ namespace Bank1
 
         public Account()
         {
-            cards = new List<Card> { };
+            cards = new List<Card>();
             Id = Guid.NewGuid();
         }
 
@@ -33,12 +33,12 @@ namespace Bank1
                 Console.WriteLine("Введите тип карты");
                 string type = Console.ReadLine();
 
-                if (type == Card.creditType)
+                if (type == Convert.ToString(Type.Credit))
                 {
                     cards.Add(new CreditCard());
                     break;
                 }
-                else if (type == Card.debitType)
+                else if (type == Convert.ToString(Type.Debit))
                 {
                     cards.Add(new DebitCard());
                     break;

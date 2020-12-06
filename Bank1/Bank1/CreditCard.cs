@@ -9,7 +9,7 @@ namespace Bank1
 
         public CreditCard()
         {
-            Type = "Credit";
+            Type = Type.Credit;
             credits = new List<Credit> { };
         }
 

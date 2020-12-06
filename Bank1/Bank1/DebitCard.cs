@@ -6,7 +6,7 @@ namespace Bank1
     {
         public DebitCard()
         {
-            Type = "Debit";
+            Type = Type.Debit;
         }
 
         public new void DisplayInfo()

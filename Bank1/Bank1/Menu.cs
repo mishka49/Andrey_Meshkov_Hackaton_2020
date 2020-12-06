@@ -126,7 +126,7 @@ namespace Bank1
             coincidence = false;
             long yourId;
             double total = 0;
-            string yourType = Card.debitType;
+            string yourType = Convert.ToString(Type.Debit);
 
             while (!coincidence)
             {
@@ -158,7 +158,7 @@ namespace Bank1
                                     }
                                     else if (card is CreditCard)
                                     {
-                                        yourType = Card.creditType;
+                                        yourType = Convert.ToString(Type.Credit);
                                         foreach (var credit in (card as CreditCard).credits)
                                         {
                                             if (credit.Status == "norepaid")
@@ -213,7 +213,7 @@ namespace Bank1
                                     {
                                         coincidence = true;
 
-                                        if (card.Type == Card.debitType && yourType == Card.creditType)
+                                        if (card.Type == Type.Debit && yourType == Convert.ToString(Type.Credit))
                                         {
                                             throw new Exception("Нельзя осуществлять переводы с кредитовой карты на дебитовую");
                                         }
@@ -409,7 +409,7 @@ namespace Bank1
                     {
                         foreach (var card in account.cards)
                         {
-                            if (card.Id == id && card.Type == Card.creditType)
+                            if (card.Id == id && card.Type == Type.Credit)
                             {
                                 (card as CreditCard).credits.Add(new Credit(total, periodOfTime));
                                 card.Total += total;
