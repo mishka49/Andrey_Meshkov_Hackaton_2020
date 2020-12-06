@@ -4,6 +4,15 @@ namespace Princess1
 {
     class Program
     {
+        public enum Result
+        {
+            Win,
+            InProgres,
+            Lost,
+            Yes,
+            No
+        }
+
         public static void ControlMovment(Knight knight)
         {
             ConsoleKeyInfo keyPushed = Console.ReadKey();
@@ -56,7 +65,7 @@ namespace Princess1
             Console.WriteLine("Health: " + knight.Health);
         }
 
-        public static string CalculateResultOfMotion(Knight knight, Princess princess)
+        public static Result CalculateResultOfMotion(Knight knight, Princess princess)
         {
             if (knight.Health - Land.Field[knight.Y, knight.X] > 0)
             {
@@ -65,20 +74,20 @@ namespace Princess1
 
                 if (knight.X == princess.X && knight.Y == princess.Y)
                 {
-                    return "Win";
+                    return Result.Lost;
                 }
                 else
                 {
-                    return "in progress";
+                    return Result.InProgres;
                 }
             }
             else
             {
-                return "Lost";
+                return Result.Lost;
             }
         }
 
-        public static string OpenMenu(string result)
+        public static Result OpenMenu(string result)
         {
             while (true)
             {
@@ -87,15 +96,15 @@ namespace Princess1
 
                 string operation = Console.ReadLine();
 
-                if (operation == "Yes")
+                if (operation == Convert.ToString(Result.Yes))
                 {
-                    return "Yes";
+                    return Result.Yes;
 
                 }
-                else if (operation == "No")
+                else if (operation == Convert.ToString(Result.No))
                 {
                     Console.Clear();
-                    return "No";
+                    return Result.No;
                 }
                 else
                 {
@@ -110,19 +119,19 @@ namespace Princess1
             {
                 Console.WriteLine("Введите размер поля");
                 Land land = new Land(EnterCorrectData<int>(), EnterCorrectData<int>());
-                string result;
+                Result result;
 
                 while (true)
                 {
                     ShowResultOfMotion(land.knight, land.princess);
                     ControlMovment(land.knight);
                     result = CalculateResultOfMotion(land.knight, land.princess);
-                    if (result == "Win")
+                    if (result == Result.Win)
                     {
                         result = OpenMenu("выиграли");
                         break;
                     }
-                    else if (result == "Lost")
+                    else if (result == Result.Lost)
                     {
                         result = OpenMenu("проиграли");
                         break;
@@ -133,7 +142,7 @@ namespace Princess1
                     }
                 }
 
-                if (result == "Yes")
+                if (result == Result.Yes)
                 {
                     continue;
                 }
