@@ -10,7 +10,7 @@ namespace Bank1
         public CreditCard()
         {
             Type = Type.Credit;
-            credits = new List<Credit> { };
+            credits = new List<Credit>();
         }
 
         public new void DisplayInfo()

@@ -13,7 +13,7 @@ namespace Bank1
 
         public User(string firstName, string lastName)
         {
-            accounts = new List<Account> { };
+            accounts = new List<Account>();
             FirstName = firstName;
             LastName = lastName;
         }

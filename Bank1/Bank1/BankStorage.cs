@@ -9,7 +9,7 @@ namespace Bank1
 
         static BankStorage()
         {
-            users = new List<User> { };
+            users = new List<User>();
         }
 
         public static void AddNewUser()
