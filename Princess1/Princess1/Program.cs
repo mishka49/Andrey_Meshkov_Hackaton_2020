@@ -74,7 +74,7 @@ namespace Princess1
             Console.WriteLine("Health: " + knight.Health);
         }
 
-        public static Result CalculateResultOfMotion(Knight knight, Princess princess)
+        public static Result CalculateMotionResult(Knight knight, Princess princess)
         {
             if (knight.Health - Land.Field[knight.Y, knight.X] > 0)
             {
@@ -134,7 +134,7 @@ namespace Princess1
                 {
                     ShowResultOfMotion(land.knight, land.princess);
                     ControlMovment(land.knight);
-                    result = CalculateResultOfMotion(land.knight, land.princess);
+                    result = CalculateMotionResult(land.knight, land.princess);
                     if (result == Result.Win)
                     {
                         result = OpenMenu("выиграли");
