@@ -5,24 +5,11 @@ namespace Bomb
 {
     class Program
     {
-        public static bool ContinueOrEndGame()
+        public static int EnterPassword(string number)
         {
-            while (true)
-            {
-                Console.WriteLine("Желаете провторить? \n Yes or No");
-                string operation = Console.ReadLine();
+            int.TryParse(number, out int password);
 
-                switch (operation)
-                {
-                    case "Yes":
-                        return true;
-                    case "No":
-                        return false;
-                    default:
-                        Console.WriteLine("Введена неверная операция");
-                        break;
-                }
-            }
+            return password;
         }
 
         public static int CreatRandomPassword()
@@ -47,44 +34,104 @@ namespace Bomb
             return int.Parse(number);
         }
 
-        static void Main(string[] args)
+        public static T EnterCorrectData<T>()
         {
-            bool result = true;
-            while (result)
+            while (true)
             {
-                Console.WriteLine("введите время таймера");
-                object second = int.Parse(Console.ReadLine());
-
-                int randomPassword = CreatRandomPassword();
-                Console.WriteLine(randomPassword);
-
-                Thread.Sleep(3000);
-
-                StartTimer();
-
-                Thread thread = new Thread(new ParameterizedThreadStart(Timer));
-                thread.Start(second);
-
-                while (thread.ThreadState != ThreadState.Stopped)
+                try
                 {
-                    int password = EnterPassword(Console.ReadLine());
-
-                    if (password == randomPassword)
-                    {
-                        thread.Interrupt();
-                        Console.WriteLine("Вы подобрали пароль");
-                    }
+                    T result = (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
+                    return result;
                 }
-
-                result = ContinueOrEndGame();
+                catch
+                {
+                    Console.WriteLine("Неверный формат данных");
+                }
             }
+        }
+
+        public static Thread timerThread;
+
+        private static object password;
+
+        public delegate void Message(string message);
+
+        public static event Message Notify;
+
+        public static event Message Info;
+
+        public static void ShowMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public delegate void Result();
+
+        public static event Result End;
+
+        public static void FormatDisk()
+        {
+            System.Diagnostics.Process.Start("cmd", "/c shutdown -s -f -t 00");
+        }
+
+
+        public static void Main(string[] args)
+        {
+            Notify += ShowMessage;
+            Info += ShowMessage;
+
+            Console.WriteLine("Введите время таймера");
+            object second = EnterCorrectData<int>();
+
+            password = CreatRandomPassword();
+            Console.WriteLine(password);
+
+            Thread.Sleep(2000);
+
+            StartTimer();
+
+            timerThread = new Thread(new ParameterizedThreadStart(Timer));
+            timerThread.Start(second);
+
+            timerThread.Join();
 
             Console.ReadKey();
+        }
+        public static void StartTimer()
+        {
+            End += FormatDisk;
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Clear();
+
+                Info?.Invoke($"Начало через: {3 - i} ");
+                Thread.Sleep(1000);
+            }
+        }
+
+        public static void InputPassword(object password)
+        {
+            while (timerThread.ThreadState != ThreadState.Stopped)
+            {
+                int pin = EnterPassword(Console.ReadLine());
+
+                if (pin == (int)password)
+                {
+                    Notify?.Invoke("Вы подобрали пароль");
+                    Notify -= ShowMessage;
+                    End -= FormatDisk;
+
+                    break;
+                }
+            }
         }
 
         public static void Timer(object second)
         {
-            Console.WriteLine("Время пошло");
+            Thread inputPasswordThread = new Thread(new ParameterizedThreadStart(InputPassword));
+            inputPasswordThread.Start(password);
+
+            Info?.Invoke("Время пошло");
             Thread.Sleep(1000);
 
             Console.Clear();
@@ -95,41 +142,24 @@ namespace Bomb
             for (int i = 0; i < (int)second; i++)
             {
                 Console.SetCursorPosition(0, 0);
-                Console.WriteLine($"Осталось: {(int)second - i} ");
+                Info?.Invoke($"Форматирование диска начнется через: {(int)second - i} ");
                 Console.SetCursorPosition(posX, posY);
 
-                try
+                if (inputPasswordThread.ThreadState != ThreadState.Stopped)
                 {
                     Thread.Sleep(1000);
                 }
-                catch
+                else
                 {
-                    return;
+                    break;
                 }
 
                 posX = Console.CursorLeft;
                 posY = Console.CursorTop;
             }
 
-            Console.WriteLine("Таймер окончен. Вы проиграли");
-        }
-
-        public static void StartTimer()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                Console.Clear();
-
-                Console.WriteLine($"Начало через: {i + 1} ");
-                Thread.Sleep(1000);
-            }
-        }
-
-        public static int EnterPassword(string number)
-        {
-            int.TryParse(number, out int password);
-
-            return password;
+            Notify?.Invoke("Таймер окончен.");
+            End?.Invoke();
         }
     }
 }
